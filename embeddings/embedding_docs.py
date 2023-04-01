@@ -43,10 +43,10 @@ class EmbeddingDocs:
     def embed_docs(self, docs)-> Chroma:
         chroma = Chroma(collection_name = self.collection_name)
         texts = self._split_docs(docs)
-        vector_db = chroma.from_documents(texts, self.embeddings, persist_directory = self.persist_directory)
+        vector_db = chroma.from_documents(texts, embedding_function = self.embeddings, persist_directory = self.persist_directory)
         vector_db.persist()
         return vector_db
         
     def load_db(self) -> Chroma:
-        vector_db = Chroma(self.persist_directory, embedding_function = self.embeddings)
+        vector_db = Chroma(persist_directory = self.persist_directory, embedding_function = self.embeddings)
         return vector_db
