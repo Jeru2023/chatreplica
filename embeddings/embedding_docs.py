@@ -40,7 +40,6 @@ class EmbeddingDocs:
         texts = text_splitter.split_documents(docs)
         return texts
     
-    @classmethod
     def embed_docs(self, docs)-> Chroma:
         chroma = Chroma(collection_name = self.collection_name)
         texts = self._split_docs(docs)
@@ -48,7 +47,6 @@ class EmbeddingDocs:
         vector_db.persist()
         return vector_db
         
-    @classmethod
     def load_db(self) -> Chroma:
         vector_db = Chroma(self.persist_directory, embedding_function = self.embeddings)
         return vector_db
